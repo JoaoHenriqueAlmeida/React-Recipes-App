@@ -7,7 +7,7 @@ const isEmailValid = (email) => {
   return regexEmail.test(email) === true;
 };
 
-function Login() {
+export default function Login() {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,5 +50,3 @@ function Login() {
     </main>
   );
 }
-
-export default Login;
