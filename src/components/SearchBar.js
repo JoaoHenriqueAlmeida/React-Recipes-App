@@ -1,28 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function SearchBar() {
-/*   const toShowSearchBar = () => {
-    if (!clickSearchButton) {
-      return (
-
-      );
-    }
-    if (clickSearchButton) {
-      return (
-        <input
-          className="inputSearchBar"
-          data-testid="search-input"
-        />
-      );
-    }
-  }; */
+  const [showInput, setShowInput] = useState(false);
+  const toShowSearchBar = () => {
+    setShowInput(!showInput);
+  };
 
   return (
     <div>
       <button
         type="button"
-        // onClick={ toShowSearchBar }
+        onClick={ toShowSearchBar }
       >
         <img
           src={ searchIcon }
@@ -30,10 +19,15 @@ export default function SearchBar() {
           data-testid="search-top-btn"
         />
       </button>
-      <input
-        className="InputSearchBar"
-        data-testid="search-input"
-      />
+      {!showInput
+        ? null
+        : (
+          <input
+            data-testid="search-input"
+            type="text"
+          />
+        )}
+
     </div>
   );
 }
