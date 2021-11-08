@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderWithSearchBar from '../components/HeaderWithSearchBar';
 
 export default function ExploreByLocation() {
   return (
-    <Header />
+    <HeaderWithSearchBar />
   );
 }

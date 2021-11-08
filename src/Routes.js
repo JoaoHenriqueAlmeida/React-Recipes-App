@@ -22,26 +22,35 @@ export default function Routes() {
     <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ Meals } />
-      <Route path="/comidas/{id-da-receita}" component={ MealDetails } />
-      <Route path="/comidas/{id-da-receita}/in-progress" component={ InProgressMeal } />
+      <Route exact path="/comidas/{id-da-receita}" component={ MealDetails } />
+      <Route
+        exact
+        path="/comidas/{id-da-receita}/in-progress"
+        component={ InProgressMeal }
+      />
       <Route exact path="/bebidas" component={ Cocktails } />
-      <Route path="/bebidas/{id-da-receita}" component={ CocktailDetails } />
+      <Route exact path="/bebidas/{id-da-receita}" component={ CocktailDetails } />
       <Route
         path="/bebidas/{id-da-receita}/in-progress"
         component={ InProgressCocktail }
       />
       <Route exact path="/explorar" component={ Explore } />
-      <Route path="/explorar/comidas" component={ ExploreMeals } />
-      <Route path="/explorar/comidas/ingredientes" component={ ExploreMealIngredient } />
-      <Route path="/explorar/bebidas" component={ ExploreCocktails } />
+      <Route exact path="/explorar/comidas" component={ ExploreMeals } />
       <Route
+        exact
+        path="/explorar/comidas/ingredientes"
+        component={ ExploreMealIngredient }
+      />
+      <Route exact path="/explorar/bebidas" component={ ExploreCocktails } />
+      <Route
+        exact
         path="/explorar/bebidas/ingredientes"
         component={ ExploreCocktailIngredient }
       />
-      <Route path="/explorar/comidas/area" component={ ExploreByLocation } />
-      <Route path="/perfil" component={ Profile } />
-      <Route path="/receitas-feitas" component={ DoneRecipes } />
-      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+      <Route exact path="/explorar/comidas/area" component={ ExploreByLocation } />
+      <Route exact path="/perfil" component={ Profile } />
+      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
+      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
     </Switch>
   );
 }
