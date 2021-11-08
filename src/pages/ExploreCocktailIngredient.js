@@ -1,8 +1,12 @@
 import React from 'react';
 import HeaderWithoutSearchBar from '../components/HeaderWithoutSearchBar';
+import Footer from '../components/Footer';
 
 export default function ExploreCocktailIngredient() {
   return (
-    <HeaderWithoutSearchBar />
+    <>
+      <HeaderWithoutSearchBar />
+      <Footer />
+    </>
   );
 }
