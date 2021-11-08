@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderWithoutSearchBar from '../components/HeaderWithoutSearchBar';
 
 export default function ExploreMealIngredient() {
   return (
-    <Header />
+    <HeaderWithoutSearchBar />
   );
 }
