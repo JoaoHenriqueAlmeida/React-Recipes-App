@@ -35,8 +35,6 @@ export default function DoneMealCard() {
           {tagName}
         </p>
       ))}
-      {recipe.alcoholicOrNot.includes('Alco')
-        ? <p>{recipe.alcoholicOrNot}</p> : null }
     </section>
   );
 }
