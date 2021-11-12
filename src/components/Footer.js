@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       data-testid="footer"
-      className="a"
+      className="footer"
     >
       <Link to="/bebidas">
         <img
