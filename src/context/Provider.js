@@ -36,7 +36,6 @@ export default function Provider({ children }) {
 
   // trecho de código abaixo está em hardCode, será dinâmico assim que as receitas feitas forem para o contexto;
   const [resultsAPI, setResultsAPI] = useState([]);
-
   const [loading, setLoading] = useState(false);
 
   const verifyArraySize = () => {

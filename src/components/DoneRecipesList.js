@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import AppContext from '../context/AppContext';
 // import DoneCocktailCard from './DoneCocktailCard';
 // import DoneMealCard from './DoneMealCard';
 import shareIcon from '../images/shareIcon.svg';
 import './DoneRecipesList.css';
 
-const doneMealCard = (recipe, index) => (
+const doneMealCard = (recipe, index, copiedMessage, setCopiedMessage) => (
   <section key={ index }>
     <Link to={ `/comidas/${recipe.id}` }>
       <img
@@ -29,13 +30,20 @@ const doneMealCard = (recipe, index) => (
     >
       {recipe.doneDate}
     </p>
-    <button type="button">
+    <button
+      type="button"
+      onClick={ () => {
+        setCopiedMessage('Link copiado!');
+        copy(`http://localhost:3000/comidas/${recipe.id}`);
+      } }
+    >
       <img
         data-testid={ `${index}-horizontal-share-btn` }
         src={ shareIcon }
         alt="share button"
       />
     </button>
+    <p>{copiedMessage}</p>
     {recipe.tags.map((tagName) => (
       <p
         data-testid={ `${index}-${tagName}-horizontal-tag` }
@@ -47,7 +55,7 @@ const doneMealCard = (recipe, index) => (
   </section>
 );
 
-const doneCocktailCard = (recipe, index) => (
+const doneCocktailCard = (recipe, index, copiedMessage, setCopiedMessage) => (
   <section key={ index }>
     <Link to={ `/bebidas/${recipe.id}` }>
       <img
@@ -69,18 +77,31 @@ const doneCocktailCard = (recipe, index) => (
     >
       {recipe.doneDate}
     </p>
-    <button type="button">
+    <button
+      type="button"
+      onClick={ () => {
+        setCopiedMessage('Link copiado!');
+        copy(`http://localhost:3000/bebidas/${recipe.id}`);
+      } }
+    >
       <img
         data-testid={ `${index}-horizontal-share-btn` }
         src={ shareIcon }
         alt="share button"
       />
     </button>
+    <p>{copiedMessage}</p>
   </section>
 );
 
 export default function DoneRecipesList() {
-  const { doneRecipes, setDoneRecipes, startingDoneRecipes } = useContext(AppContext);
+  const {
+    doneRecipes,
+    setDoneRecipes,
+    startingDoneRecipes,
+  } = useContext(AppContext);
+
+  const [copiedMessage, setCopiedMessage] = useState('');
 
   return (
     <section>
@@ -112,7 +133,8 @@ export default function DoneRecipesList() {
       </button>
       {doneRecipes.map((recipe, index) => (
         recipe.type === 'comida'
-          ? doneMealCard(recipe, index) : doneCocktailCard(recipe, index))) }
+          ? doneMealCard(recipe, index, copiedMessage, setCopiedMessage)
+          : doneCocktailCard(recipe, index, copiedMessage, setCopiedMessage))) }
     </section>
   );
 }
