@@ -28,11 +28,33 @@ const startingDoneRecipes = [
   },
 ];
 
+const startingFavoriteRecipes = [
+  {
+    id: '52771',
+    type: 'comida',
+    area: 'Italian',
+    category: 'Vegetarian',
+    alcoholicOrNot: '',
+    name: 'Spicy Arrabiata Penne',
+    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  },
+  {
+    id: '178319',
+    type: 'bebida',
+    area: '',
+    category: 'Cocktail',
+    alcoholicOrNot: 'Alcoholic',
+    name: 'Aquamarine',
+    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+  },
+];
+
 export default function Provider({ children }) {
   const history = useHistory();
   const location = useLocation();
   const [nameMenu, setNameMenu] = useState('');
   const [doneRecipes, setDoneRecipes] = useState(startingDoneRecipes);
+  const [favoriteRecipes, setFavoriteRecipes] = useState(startingFavoriteRecipes);
 
   // trecho de código abaixo está em hardCode, será dinâmico assim que as receitas feitas forem para o contexto;
   const [resultsAPI, setResultsAPI] = useState([]);
@@ -83,6 +105,9 @@ export default function Provider({ children }) {
     resultsAPI,
     fetchFunc: fetchApiMealsOrDrinks,
     loading,
+    favoriteRecipes,
+    setFavoriteRecipes,
+    startingFavoriteRecipes,
   };
 
   return (
