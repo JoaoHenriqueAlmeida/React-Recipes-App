@@ -9,12 +9,12 @@ export default function Explore() {
       <HeaderWithoutSearchBar />
       <Link to="/explorar/comidas">
         <button type="button" data-testid="explore-food">
-          Explorar comidas
+          Explorar Comidas
         </button>
       </Link>
       <Link to="/explorar/bebidas" data-testid="explore-drinks">
         <button type="button">
-          Explorar bebidas
+          Explorar Bebidas
         </button>
       </Link>
       <Footer />
