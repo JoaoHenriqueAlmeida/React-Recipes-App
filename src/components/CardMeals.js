@@ -32,7 +32,6 @@ export default function CardMeals() {
                   />
                   <h2 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h2>
                 </Link>
-
               </div>) : null
           ))}
         </div>
