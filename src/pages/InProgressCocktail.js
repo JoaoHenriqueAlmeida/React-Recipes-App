@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
-import '../styles/InProgressCocktail.css';
+import './InProgressMeal.css';
 
 export default function DoneRecipes() {
   const { id } = useParams();
