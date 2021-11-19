@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
-import './InProgressMeal.css';
+import './InProgressRecipe.css';
 
 export default function DoneRecipes() {
   const { id } = useParams();
@@ -33,8 +33,8 @@ export default function DoneRecipes() {
       });
   }
 
-  const markAsDone = (eve) => {
-    const item = eve.target.parentElement;
+  const markAsDone = ({ target }) => {
+    const item = target.parentElement;
     if (Object.values(item.classList)[0] === undefined) item.classList.add('completo');
     else item.classList.remove('completo');
   };
@@ -58,10 +58,10 @@ export default function DoneRecipes() {
       <div className="recipes-list">
         <p> Ingredientes </p>
         { values.map((value, index) => (
-          <label key={ index } htmlFor="check" data-testid={ `${index}-ingredient-step` }>
+          <label key={ index } htmlFor={ `${index}-check` } data-testid={ `${index}-ingredient-step` }>
             {`${value} - ${measures[index]}`}
             <input
-              id="check"
+              id={ `${index}-check` }
               key={ index }
               type="checkbox"
               onClick={ markAsDone }

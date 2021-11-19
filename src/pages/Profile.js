@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import HeaderWithoutSearchBar from '../components/HeaderWithoutSearchBar';
 
 export default function Profile() {
-  useEffect(() => {
-    function setOnStorage() {
-      localStorage.setItem('user', '{ "email": "email@mail.com" }');
-    }
-    return setOnStorage();
-  }, []);
+  const validEmail = JSON.parse(localStorage.getItem('user'));
+  const getEmail = validEmail ? Object.value(validEmail)[0] : 'email@email.com';
 
   return (
     <>
       <HeaderWithoutSearchBar />
-      <p data-testid="profile-email">{JSON.parse(localStorage.getItem('user')).email }</p>
+      <p data-testid="profile-email">{ getEmail }</p>
       <Link to="/receitas-feitas">
         <button data-testid="profile-done-btn" type="button">Receitas Feitas</button>
       </Link>
