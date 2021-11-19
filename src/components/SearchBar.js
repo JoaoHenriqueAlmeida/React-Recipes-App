@@ -7,6 +7,7 @@ import AppContext from '../context/AppContext';
 
 export default function SearchBar() {
   const { searchBarValues, setSearchBarValues, useSearch } = useContext(AppContext);
+  const [showInput, setShowInput] = useState(false);
 
   const toShowSearchBar = () => {
     setShowInput(!showInput);

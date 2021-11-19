@@ -30,18 +30,24 @@ export default function HeaderWithSearchBar() {
     if (location.pathname === '/receitas-favoritas') {
       setNameMenu('Receitas Favoritas');
     }
-  });
+  }, []);
 
   return (
+
     <header>
-      <Link to="/perfil">
-        <img
-          src={ profileIcon }
-          alt="ProfilePicture"
-          data-testid="profile-top-btn"
-        />
-      </Link>
-      <h1 data-testid="page-title">{ nameMenu }</h1>
+      { location.pathname === '/perfil' ? <h1 data-testid="page-title">{ nameMenu }</h1>
+        : (
+          <>
+            <Link to="/perfil">
+              <img
+                src={ profileIcon }
+                alt="ProfilePicture"
+                data-testid="profile-top-btn"
+              />
+            </Link>
+            <h1 data-testid="page-title">{ nameMenu }</h1>
+          </>
+        ) }
     </header>
   );
 }

@@ -22,7 +22,7 @@ export default function Routes() {
     <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ Meals } />
-      <Route exact path="/comidas/:id/in-progress" component={ MealDetails } />
+      <Route exact path="/comidas/:id/" component={ MealDetails } />
       <Route
         exact
         path="/comidas/{id-da-receita}/in-progress"
