@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
@@ -7,6 +7,7 @@ import './InProgressRecipe.css';
 export default function DoneRecipes() {
   const { id } = useParams();
   const { drinkDetails, setDrinkDetails } = useContext(AppContext);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -35,8 +36,24 @@ export default function DoneRecipes() {
 
   const markAsDone = ({ target }) => {
     const item = target.parentElement;
-    if (Object.values(item.classList)[0] === undefined) item.classList.add('completo');
-    else item.classList.remove('completo');
+
+    if (Object.values(item.classList)[0] === undefined) {
+      item.classList.add('completo');
+      setIsChecked(true);
+    } else {
+      item.classList.remove('completo');
+      setIsChecked(false);
+    }
+
+    const inProgressRecipes = {
+      cocktails: {
+        [id]: [],
+      },
+    };
+
+    if (!localStorage.getItem(inProgressRecipes)) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    }
   };
 
   return (
@@ -69,6 +86,7 @@ export default function DoneRecipes() {
               key={ index }
               type="checkbox"
               onClick={ markAsDone }
+              defaultChecked={ isChecked }
             />
           </label>
         )) }

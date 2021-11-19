@@ -4,8 +4,8 @@ import Footer from '../components/Footer';
 import HeaderWithoutSearchBar from '../components/HeaderWithoutSearchBar';
 
 export default function Profile() {
-  const validEmail = JSON.parse(localStorage.getItem('user'));
-  const getEmail = validEmail ? Object.value(validEmail)[0] : 'email@email.com';
+  const storageEmail = JSON.parse(localStorage.getItem('user'));
+  const getEmail = storageEmail ? Object.values(storageEmail)[0] : 'email@email.com';
 
   return (
     <>
