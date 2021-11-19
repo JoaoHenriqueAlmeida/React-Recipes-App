@@ -58,7 +58,11 @@ export default function DoneRecipes() {
       <div className="recipes-list">
         <p> Ingredientes </p>
         { values.map((value, index) => (
-          <label key={ index } htmlFor={ `${index}-check` } data-testid={ `${index}-ingredient-step` }>
+          <label
+            key={ index }
+            htmlFor={ `${index}-check` }
+            data-testid={ `${index}-ingredient-step` }
+          >
             {`${value} - ${measures[index]}`}
             <input
               id={ `${index}-check` }
