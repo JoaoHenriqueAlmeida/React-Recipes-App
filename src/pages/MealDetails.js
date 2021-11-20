@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-
+import copy from 'clipboard-copy';
 import AppContext from '../context/AppContext';
 
 import './MealDetails.css';
@@ -9,11 +9,10 @@ export default function MealDetails() {
   const { id } = useParams();
   const { mealDetail, setMealDetail } = useContext(AppContext);
   const [recommendedDrinks, setRecommendedDrinks] = useState([]);
+  const [copiedMessage, setCopiedMessage] = useState('');
   const firstSixRecommendedCards = 6;
   const values = []; // usar na renderização de ingredientes
   const measures = []; // usar na renderização de medidas dos ingredientes
-  console.log(id);
-  // FETCH PARA DETALHES DA COMIDA
 
   useEffect(() => {
     const fetchMeal = async () => {
@@ -50,6 +49,7 @@ export default function MealDetails() {
         }
       });
   }
+
   return (
     <div className="details-container page-main">
 
@@ -63,8 +63,24 @@ export default function MealDetails() {
       <h2 data-testid="recipe-title">{ mealDetail.strMeal }</h2>
 
       <div className="buttons-container">
-        <button type="button" data-testid="share-btn">Compartilhar</button>
-        <button type="button" data-testid="favorite-btn">Favorite</button>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ () => {
+            setCopiedMessage('Link copiado!');
+            copy(`http://localhost:3000/comidas/${id}`);
+          } }
+        >
+          Compartilhar
+
+        </button>
+        <button
+          type="button"
+          data-testid="favorite-btn"
+        >
+          Favoritar
+        </button>
+        <p>{copiedMessage}</p>
       </div>
 
       <p

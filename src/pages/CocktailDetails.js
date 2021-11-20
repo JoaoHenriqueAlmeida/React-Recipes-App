@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import copy from 'clipboard-copy';
 
 import AppContext from '../context/AppContext';
 
@@ -9,6 +10,7 @@ export default function CocktailDetails() {
   const { id } = useParams();
   const { drinkDetails, setDrinkDetails } = useContext(AppContext);
   const [recommendedFoods, setRecommendedFoods] = useState([]);
+  const [copiedMessage, setCopiedMessage] = useState('');
   const firstSixRecommendedCards = 6;
   const values = []; // usar na renderização de ingredientes
   const measures = []; // usar na renderização de medidas dos ingredientes
@@ -59,8 +61,24 @@ export default function CocktailDetails() {
       </div>
 
       <div className="buttons-container">
-        <button type="button" data-testid="share-btn">Compartilhar</button>
-        <button type="button" data-testid="favorite-btn">Favorite</button>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ () => {
+            setCopiedMessage('Link copiado!');
+            copy(`http://localhost:3000/bebidas/${id}`);
+          } }
+        >
+          Compartilhar
+
+        </button>
+        <button
+          type="button"
+          data-testid="favorite-btn"
+        >
+          Fvoritar
+        </button>
+        <p>{copiedMessage}</p>
       </div>
 
       <h4
