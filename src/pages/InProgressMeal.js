@@ -37,8 +37,38 @@ export default function DoneRecipes() {
     const item = target.parentElement;
     if (Object.values(item.classList)[0] === undefined) item.classList.add('completo');
     else item.classList.remove('completo');
+
+    const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
+      || { meals: 0 };
+    const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
+    const toSpread = recipesParsed.meals[recipeNumber] || [];
+    const recipesStringified = {
+      cocktails: {
+
+      },
+      meals: {
+        [id]: [...toSpread, target.id],
+      },
+    };
+
+    if (localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
+    }
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: {
+
+      },
+      meals: {
+        [id]: [target.id],
+      },
+    }));
   };
 
+  const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
+  || { meals: 0 };
+  const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
+  const storageArray = recipesParsed.meals[recipeNumber];
   return (
     <>
       <h2 data-testid="recipe-title">
@@ -64,12 +94,23 @@ export default function DoneRecipes() {
             data-testid={ `${index}-ingredient-step` }
           >
             {`${value} - ${measures[index]}`}
-            <input
-              id={ `${index}-check` }
-              key={ index }
-              type="checkbox"
-              onClick={ markAsDone }
-            />
+            {localStorage.getItem('inProgressRecipes')
+              ? (
+                <input
+                  id={ `${index}-check` }
+                  key={ index }
+                  type="checkbox"
+                  onClick={ markAsDone }
+                  defaultChecked={ storageArray[index] === `${index}-check` }
+                />)
+              : (
+                <input
+                  id={ `${index}-check` }
+                  key={ index }
+                  type="checkbox"
+                  onClick={ markAsDone }
+                />
+              ) }
           </label>
         )) }
       </div>
