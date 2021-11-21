@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
@@ -7,7 +7,6 @@ import './InProgressRecipe.css';
 export default function DoneRecipes() {
   const { id } = useParams();
   const { drinkDetails, setDrinkDetails } = useContext(AppContext);
-  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -39,23 +38,41 @@ export default function DoneRecipes() {
 
     if (Object.values(item.classList)[0] === undefined) {
       item.classList.add('completo');
-      setIsChecked(true);
     } else {
       item.classList.remove('completo');
-      setIsChecked(false);
     }
 
-    const inProgressRecipes = {
+    const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    || { cocktails: 0 };
+    const recipeNumber = Object.getOwnPropertyNames(recipesParsed.cocktails)[0];
+    const toSpread = recipesParsed.cocktails[recipeNumber] || [];
+    const recipesStringified = {
       cocktails: {
-        [id]: [],
+        [id]: [...toSpread, target.id],
+      },
+      meals: {
+
       },
     };
 
-    if (!localStorage.getItem(inProgressRecipes)) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    if (localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
     }
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: {
+
+      },
+      meals: {
+        [id]: [target.id],
+      },
+    }));
   };
 
+  const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
+  || { meals: 0 };
+  const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
+  const storageArray = recipesParsed.meals[recipeNumber];
   return (
     <>
       <h2 data-testid="recipe-title">
@@ -81,13 +98,23 @@ export default function DoneRecipes() {
             data-testid={ `${index}-ingredient-step` }
           >
             {`${value} - ${measures[index]}`}
-            <input
-              id={ `${index}-check` }
-              key={ index }
-              type="checkbox"
-              onClick={ markAsDone }
-              defaultChecked={ isChecked }
-            />
+            {localStorage.getItem('inProgressRecipes')
+              ? (
+                <input
+                  id={ `${index}-check` }
+                  key={ index }
+                  type="checkbox"
+                  onClick={ markAsDone }
+                  defaultChecked={ storageArray[index] === `${index}-check` }
+                />)
+              : (
+                <input
+                  id={ `${index}-check` }
+                  key={ index }
+                  type="checkbox"
+                  onClick={ markAsDone }
+                />
+              ) }
           </label>
         )) }
       </div>
