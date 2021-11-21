@@ -22,16 +22,16 @@ export default function Routes() {
     <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ Meals } />
-      <Route exact path="/comidas/{id-da-receita}" component={ MealDetails } />
+      <Route exact path="/comidas/:id/" component={ MealDetails } />
       <Route
         exact
-        path="/comidas/{id-da-receita}/in-progress"
+        path="/comidas/:id/in-progress"
         component={ InProgressMeal }
       />
       <Route exact path="/bebidas" component={ Cocktails } />
-      <Route exact path="/bebidas/{id-da-receita}" component={ CocktailDetails } />
+      <Route exact path="/bebidas/:id" component={ CocktailDetails } />
       <Route
-        path="/bebidas/{id-da-receita}/in-progress"
+        path="/bebidas/:id/in-progress"
         component={ InProgressCocktail }
       />
       <Route exact path="/explorar" component={ Explore } />

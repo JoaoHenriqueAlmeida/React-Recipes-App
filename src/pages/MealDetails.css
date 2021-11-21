@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.recipe-card {
+  background-color: beige;
+  height: 200px;
+  margin: 5px;
+  max-width: 200px;
+  text-align: center;
+}
+
+.recipe-card p {
+  margin: 1px;
+}
+
+.recipe-card img {
+  border-radius: 20px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: nowrap row;
+}
+
+.category-text {
+  opacity: 0.5;
+}
+
+.favorite-cards {
+  display: flex;
+  margin: 10px;
+}
+
+.favorite-cards h4 {
+  font-size: medium;
+}
+
+.favorite-cards a {
+  text-decoration: none;
+}
+
+.favorite-container button {
+  margin: 4px;
+  padding: 12px;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 70px;
+  max-width: 320px;
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.details-button {
+  border-radius: 10px;
+  bottom: 0;
+  margin: auto;
+  position: fixed;
+  z-index: 100;
+}
+
+.fav-filterbuttons {
+  margin: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.buttons-container {
+  display: flex;
+}
+
+.details-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+}
+
+.details-container ul {
+  list-style: none;
+}
+
+.start-button {
+  bottom: 0;
+  position: fixed;
+}
