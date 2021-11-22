@@ -109,6 +109,7 @@ export default function DoneRecipes() {
               ? (
                 <input
                   name={ `${index}-check` }
+                  id={ `${index}-check` }
                   key={ index }
                   type="checkbox"
                   onClick={ markAsDone }
@@ -117,6 +118,7 @@ export default function DoneRecipes() {
               : (
                 <input
                   name={ `${index}-check` }
+                  id={ `${index}-check` }
                   key={ index }
                   type="checkbox"
                   onClick={ markAsDone }
