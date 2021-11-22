@@ -33,8 +33,10 @@ export default function DoneRecipes() {
       });
   }
 
-  const markAsDone = ({ target }) => {
-    const item = target.parentElement;
+  const [boxes, setBoxes] = React.useState({});
+
+  const markAsDone = (event) => {
+    const item = event.target.parentElement;
 
     if (Object.values(item.classList)[0] === undefined) {
       item.classList.add('completo');
@@ -42,13 +44,18 @@ export default function DoneRecipes() {
       item.classList.remove('completo');
     }
 
+    const {
+      target: { name, checked },
+    } = event;
+    setBoxes({ ...boxes, [name]: checked });
+
     const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
     || { cocktails: 0 };
     const recipeNumber = Object.getOwnPropertyNames(recipesParsed.cocktails)[0];
     const toSpread = recipesParsed.cocktails[recipeNumber] || [];
     const recipesStringified = {
       cocktails: {
-        [id]: [...toSpread, target.id],
+        [id]: [...toSpread, event.target.id],
       },
       meals: {
 
@@ -61,13 +68,18 @@ export default function DoneRecipes() {
 
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails: {
-        [id]: [target.id],
+        [id]: [event.target.id],
       },
       meals: {
 
       },
     }));
   };
+
+  function isDisabled() {
+    const { length } = Object.values(boxes).filter(Boolean);
+    return length !== values.length;
+  }
 
   const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
   || { cocktails: 0 };
@@ -101,7 +113,7 @@ export default function DoneRecipes() {
             {localStorage.getItem('inProgressRecipes')
               ? (
                 <input
-                  id={ `${index}-check` }
+                  name={ `${index}-check` }
                   key={ index }
                   type="checkbox"
                   onClick={ markAsDone }
@@ -109,7 +121,7 @@ export default function DoneRecipes() {
                 />)
               : (
                 <input
-                  id={ `${index}-check` }
+                  name={ `${index}-check` }
                   key={ index }
                   type="checkbox"
                   onClick={ markAsDone }
@@ -126,6 +138,7 @@ export default function DoneRecipes() {
         <button
           data-testid="finish-recipe-btn"
           type="button"
+          disabled={ isDisabled() }
         >
           Finalizar
         </button>

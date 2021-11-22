@@ -32,15 +32,18 @@ export default function DoneRecipes() {
         }
       });
   }
-
-  const markAsDone = ({ target }) => {
-    const item = target.parentElement;
+  const [boxes, setBoxes] = React.useState({});
+  const markAsDone = (event) => {
+    const item = event.target.parentElement;
     if (Object.values(item.classList)[0] === undefined) item.classList.add('completo');
     else item.classList.remove('completo');
 
+    // https://stackoverflow.com/questions/70058671
+    const {
+      target: { name, checked },
+    } = event;
+    setBoxes({ ...boxes, [name]: checked });
 
-
-    
     const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
       || { meals: 0 };
     const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
@@ -50,7 +53,7 @@ export default function DoneRecipes() {
 
       },
       meals: {
-        [id]: [...toSpread, target.id],
+        [id]: [...toSpread, event.target.id],
       },
     };
 
@@ -63,10 +66,15 @@ export default function DoneRecipes() {
 
       },
       meals: {
-        [id]: [target.id],
+        [id]: [event.target.id],
       },
     }));
   };
+
+  function isDisabled() {
+    const { length } = Object.values(boxes).filter(Boolean);
+    return length !== values.length;
+  }
 
   const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
   || { meals: 0 };
@@ -100,7 +108,7 @@ export default function DoneRecipes() {
             {localStorage.getItem('inProgressRecipes')
               ? (
                 <input
-                  id={ `${index}-check` }
+                  name={ `${index}-check` }
                   key={ index }
                   type="checkbox"
                   onClick={ markAsDone }
@@ -108,7 +116,7 @@ export default function DoneRecipes() {
                 />)
               : (
                 <input
-                  id={ `${index}-check` }
+                  name={ `${index}-check` }
                   key={ index }
                   type="checkbox"
                   onClick={ markAsDone }
@@ -125,6 +133,7 @@ export default function DoneRecipes() {
         <button
           data-testid="finish-recipe-btn"
           type="button"
+          disabled={ isDisabled() }
         >
           Finalizar
         </button>
