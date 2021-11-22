@@ -38,6 +38,9 @@ export default function DoneRecipes() {
     if (Object.values(item.classList)[0] === undefined) item.classList.add('completo');
     else item.classList.remove('completo');
 
+
+
+    
     const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
       || { meals: 0 };
     const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
