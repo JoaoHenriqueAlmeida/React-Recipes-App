@@ -2,12 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import AppContext from '../context/AppContext';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 import './MealDetails.css';
 
 export default function MealDetails() {
   const { id } = useParams();
-  const { mealDetail, setMealDetail } = useContext(AppContext);
+  const { mealDetail, setMealDetail,
+    toFavorite, favoriteHeart, setFavoriteHeart } = useContext(AppContext);
   const [recommendedDrinks, setRecommendedDrinks] = useState([]);
   const [copiedMessage, setCopiedMessage] = useState('');
   const firstSixRecommendedCards = 6;
@@ -22,6 +25,14 @@ export default function MealDetails() {
       setMealDetail(mealDetails);
     };
     fetchMeal();
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('favoriteRecipes')) {
+      const arrayStorage = JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .map((recipe) => recipe.id);
+      setFavoriteHeart(arrayStorage.includes(id));
+    }
   }, []);
 
   // FETCH PARA DRINKS RECOMENDADOS
@@ -74,12 +85,29 @@ export default function MealDetails() {
           Compartilhar
 
         </button>
-        <button
-          type="button"
-          data-testid="favorite-btn"
-        >
-          Favoritar
-        </button>
+        {favoriteHeart
+          ? (
+            <button
+              type="button"
+              data-testid="favorite-btn"
+              onClick={ () => toFavorite(id) }
+              src={ blackHeartIcon }
+              alt="heart"
+            >
+              <img src={ blackHeartIcon } alt="Heart" />
+            </button>
+          )
+          : (
+            <button
+              type="button"
+              data-testid="favorite-btn"
+              onClick={ () => toFavorite(id) }
+              src={ whiteHeartIcon }
+              alt="heart"
+            >
+              <img src={ whiteHeartIcon } alt="Heart" />
+            </button>
+          ) }
         <p>{copiedMessage}</p>
       </div>
 
