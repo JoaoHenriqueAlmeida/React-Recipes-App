@@ -51,18 +51,18 @@ export default function DoneRecipes() {
       },
     };
 
-    if (!localStorage.getItem('inProgressRecipes')) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        cocktails: {
-
-        },
-        meals: {
-          [id]: [target.id],
-        },
-      }));
+    if (localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
     }
 
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: {
+
+      },
+      meals: {
+        [id]: [target.id],
+      },
+    }));
   };
 
   const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
