@@ -48,14 +48,6 @@ export default function DoneRecipes() {
       || { meals: 0 };
     const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
     const toSpread = recipesParsed.meals[recipeNumber] || [];
-    const recipesStringified = {
-      cocktails: {
-
-      },
-      meals: {
-        [id]: [...toSpread, event.target.id],
-      },
-    };
 
     if (!localStorage.getItem('inProgressRecipes')) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
