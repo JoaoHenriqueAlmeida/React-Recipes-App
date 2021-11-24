@@ -47,7 +47,6 @@ export default function DoneRecipes() {
     const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
       || { meals: 0 };
     const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
-    const toSpread = recipesParsed.meals[recipeNumber] || [];
 
     if (!localStorage.getItem('inProgressRecipes')) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
