@@ -28,32 +28,10 @@ const startingDoneRecipes = [
   },
 ];
 
-const startingFavoriteRecipes = [
-  {
-    id: '52771',
-    type: 'comida',
-    area: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  },
-  {
-    id: '178319',
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-  },
-];
-
 export default function Provider({ children }) {
   const location = useLocation();
   const [nameMenu, setNameMenu] = useState('');
   const [doneRecipes, setDoneRecipes] = useState(startingDoneRecipes);
-  const [favoriteRecipes, setFavoriteRecipes] = useState(startingFavoriteRecipes);
   // trecho de código abaixo está em hardCode, será dinâmico assim que as receitas feitas forem para o contexto;
   const [resultsAPI, setResultsAPI] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('');
@@ -62,23 +40,13 @@ export default function Provider({ children }) {
   const [drinkId, setDrinkId] = useState('');
   const [arraySize, setArraySize] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [mealDetail, setMealDetail] = useState({});
   const [searchBarValues, setSearchBarValues] = useState({
     text: '',
     type: '',
   });
-
-  /* const verifyArraySize = () => {
-    if (resultsAPI.length === 1) {
-      if (location.pathname.includes('comidas')) {
-        history.push(`/comidas/${resultsAPI[0].idMeal}`);
-      }
-      if (location.pathname.includes('bebidas')) {
-        history.push(`/bebidas/${resultsAPI[0].idDrink}`);
-      }
-    }
-  }; */
 
   async function fetchApiMealsOrDrinks(URL, FILTER_SEARCH, INPUT_SEARCH) {
     setLoading(true);
@@ -172,11 +140,47 @@ export default function Provider({ children }) {
     }
   };
 
-  /*   useEffect(() => {
-    if (resultsAPI) {
-      verifyArraySize();
+  const toFavorite = (id) => {
+    let favoriteObject = {};
+
+    if (location.pathname.includes('comidas')) {
+      favoriteObject = {
+        id,
+        type: 'comida',
+        area: mealDetail.strArea,
+        category: mealDetail.strCategory,
+        alcoholicOrNot: '',
+        name: mealDetail.strMeal,
+        image: mealDetail.strMealThumb,
+      };
+    } else {
+      favoriteObject = {
+        id,
+        type: 'bebida',
+        area: '',
+        category: drinkDetails.strCategory,
+        alcoholicOrNot: drinkDetails.strAlcoholic,
+        name: drinkDetails.strDrink,
+        image: drinkDetails.strDrinkThumb,
+      };
     }
-  }); */
+
+    const favoriteParse = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
+    if (favoriteHeart) {
+      setFavoriteHeart(false);
+      const storageArray = favoriteParse.filter((recipe) => recipe.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(storageArray));
+    }
+    if (!favoriteHeart) {
+      setFavoriteHeart(true);
+      if (!localStorage.getItem('favoriteRecipes')) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteObject));
+      }
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify([...favoriteParse, favoriteObject]));
+    }
+  };
 
   const state = {
     nameMenu,
@@ -187,9 +191,6 @@ export default function Provider({ children }) {
     resultsAPI,
     fetchFunc: fetchApiMealsOrDrinks,
     loading,
-    favoriteRecipes,
-    setFavoriteRecipes,
-    startingFavoriteRecipes,
     currentCategory,
     setCurrentCategory,
     filterState,
@@ -209,6 +210,9 @@ export default function Provider({ children }) {
     setDrinkDetails,
     mealDetail,
     setMealDetail,
+    toFavorite,
+    favoriteHeart,
+    setFavoriteHeart,
   };
 
   return (
