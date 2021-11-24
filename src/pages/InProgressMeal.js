@@ -32,34 +32,38 @@ export default function DoneRecipes() {
         }
       });
   }
-  const [boxes, setBoxes] = React.useState({});
-  const markAsDone = (event) => {
-    const item = event.target.parentElement;
+
+  const markAsDone = ({ target }) => {
+    const item = target.parentElement;
     if (Object.values(item.classList)[0] === undefined) item.classList.add('completo');
     else item.classList.remove('completo');
 
-    // https://stackoverflow.com/questions/70058671
-    const {
-      target: { name, checked },
-    } = event;
-    setBoxes({ ...boxes, [name]: checked });
+    const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
+      || { meals: 0 };
+    const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
+    const toSpread = recipesParsed.meals[recipeNumber] || [];
+    const recipesStringified = {
+      cocktails: {
 
-    if (!localStorage.getItem('inProgressRecipes')) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        cocktails: {
+      },
+      meals: {
+        [id]: [...toSpread, target.id],
+      },
+    };
 
-        },
-        meals: {
-          [id]: [target.id],
-        },
-      }));
+    if (localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
     }
-  };
 
-  function isDisabled() {
-    const { length } = Object.values(boxes).filter(Boolean);
-    return length !== values.length;
-  }
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: {
+
+      },
+      meals: {
+        [id]: [target.id],
+      },
+    }));
+  };
 
   const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
   || { meals: 0 };
@@ -93,7 +97,6 @@ export default function DoneRecipes() {
             {localStorage.getItem('inProgressRecipes')
               ? (
                 <input
-                  name={ `${index}-check` }
                   id={ `${index}-check` }
                   key={ index }
                   type="checkbox"
@@ -102,7 +105,6 @@ export default function DoneRecipes() {
                 />)
               : (
                 <input
-                  name={ `${index}-check` }
                   id={ `${index}-check` }
                   key={ index }
                   type="checkbox"
@@ -120,7 +122,6 @@ export default function DoneRecipes() {
         <button
           data-testid="finish-recipe-btn"
           type="button"
-          disabled={ isDisabled() }
         >
           Finalizar
         </button>
