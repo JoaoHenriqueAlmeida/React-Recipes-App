@@ -13,6 +13,7 @@ export default function Provider({ children }) {
   const [drinkId, setDrinkId] = useState('');
   const [arraySize, setArraySize] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [favoriteHeart, setFavoriteHeart] = useState(false);
   const [drinkDetails, setDrinkDetails] = useState([]);
   const [mealDetail, setMealDetail] = useState({});
   const [searchBarValues, setSearchBarValues] = useState({
@@ -112,6 +113,48 @@ export default function Provider({ children }) {
     }
   };
 
+  const toFavorite = (id) => {
+    let favoriteObject = {};
+
+    if (location.pathname.includes('comidas')) {
+      favoriteObject = {
+        id,
+        type: 'comida',
+        area: mealDetail.strArea,
+        category: mealDetail.strCategory,
+        alcoholicOrNot: '',
+        name: mealDetail.strMeal,
+        image: mealDetail.strMealThumb,
+      };
+    } else {
+      favoriteObject = {
+        id,
+        type: 'bebida',
+        area: '',
+        category: drinkDetails.strCategory,
+        alcoholicOrNot: drinkDetails.strAlcoholic,
+        name: drinkDetails.strDrink,
+        image: drinkDetails.strDrinkThumb,
+      };
+    }
+
+    const favoriteParse = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+
+    if (favoriteHeart) {
+      setFavoriteHeart(false);
+      const storageArray = favoriteParse.filter((recipe) => recipe.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(storageArray));
+    }
+    if (!favoriteHeart) {
+      setFavoriteHeart(true);
+      if (!localStorage.getItem('favoriteRecipes')) {
+        localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteObject));
+      }
+      localStorage.setItem('favoriteRecipes',
+        JSON.stringify([...favoriteParse, favoriteObject]));
+    }
+  };
+
   const state = {
     nameMenu,
     setNameMenu,
@@ -137,6 +180,9 @@ export default function Provider({ children }) {
     setDrinkDetails,
     mealDetail,
     setMealDetail,
+    toFavorite,
+    favoriteHeart,
+    setFavoriteHeart,
   };
 
   return (

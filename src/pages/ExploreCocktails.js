@@ -16,6 +16,7 @@ export default function ExploreCocktails() {
     };
     fetchRecipe();
   }, []);
+
   return (
     <>
       <HeaderWithoutSearchBar />
