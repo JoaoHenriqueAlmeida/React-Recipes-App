@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import HeaderWithoutSearchBar from '../components/HeaderWithoutSearchBar';
 import Footer from '../components/Footer';
 
@@ -15,6 +16,7 @@ export default function ExploreMealIngredient() {
     fetchIngredients();
   }, []);
   const numberOfCards = 12;
+
   return (
     <>
       <HeaderWithoutSearchBar />
@@ -28,6 +30,7 @@ export default function ExploreMealIngredient() {
             />
             <h1 data-testid={ `${index}-card-name` }>{ingredient.strIngredient}</h1>
           </section>
+
         ) : null
       ))}
       <Footer />
