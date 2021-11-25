@@ -2,8 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import AppContext from '../context/AppContext';
-// import DoneCocktailCard from './DoneCocktailCard';
-// import DoneMealCard from './DoneMealCard';
 import shareIcon from '../images/shareIcon.svg';
 import './DoneRecipesList.css';
 
@@ -105,9 +103,6 @@ export default function DoneRecipesList() {
 
   return (
     <section>
-      { /* {doneRecipes.map((recipe, index) => (
-        recipe.type === 'comida' ? <DoneMealCard /> : <DoneCocktailCard />
-      )) } */ }
       <button
         data-testid="filter-by-all-btn"
         type="button"
