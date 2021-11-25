@@ -1,9 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
-import AppContext from '../context/AppContext';
-// import favoriteCocktailCard from './favoriteCocktailCard';
-// import favoriteMealCard from './favoriteMealCard';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './FavoriteRecipesList.css';
@@ -95,30 +92,24 @@ const favoriteCocktailCard = (recipe, index, copiedMessage, setCopiedMessage) =>
 );
 
 export default function FavoriteRecipesList() {
-  const {
-    favoriteRecipes,
-    setFavoriteRecipes,
-    startingFavoriteRecipes,
-  } = useContext(AppContext);
-
   const [copiedMessage, setCopiedMessage] = useState('');
+  const [favoriteRecipes,
+    setFavoriteRecipes] = useState(JSON.parse(localStorage.getItem('favoriteRecipes')));
+
   return (
     <section>
-      { /* {favoriteRecipes.map((recipe, index) => (
-        recipe.type === 'comida' ? <favoriteMealCard /> : <favoriteCocktailCard />
-      )) } */ }
       <button
         data-testid="filter-by-all-btn"
         type="button"
         onClick={ () => (
-          setFavoriteRecipes(startingFavoriteRecipes.map((recipe) => recipe))) }
+          setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')))) }
       >
         All
       </button>
       <button
         data-testid="filter-by-food-btn"
         type="button"
-        onClick={ () => setFavoriteRecipes(startingFavoriteRecipes.filter((recipe) => (
+        onClick={ () => setFavoriteRecipes(favoriteRecipes.filter((recipe) => (
           recipe.type === 'comida'))) }
       >
         Food
@@ -126,7 +117,7 @@ export default function FavoriteRecipesList() {
       <button
         data-testid="filter-by-drink-btn"
         type="button"
-        onClick={ () => setFavoriteRecipes(startingFavoriteRecipes.filter((recipe) => (
+        onClick={ () => setFavoriteRecipes(favoriteRecipes.filter((recipe) => (
           recipe.type === 'bebida'))) }
       >
         Drinks

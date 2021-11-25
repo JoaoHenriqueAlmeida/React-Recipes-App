@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 import AppContext from '../context/AppContext';
 
@@ -8,13 +10,14 @@ import './MealDetails.css';
 
 export default function CocktailDetails() {
   const { id } = useParams();
-  const { drinkDetails, setDrinkDetails } = useContext(AppContext);
+  const { drinkDetails, setDrinkDetails,
+    favoriteHeart, setFavoriteHeart, toFavorite } = useContext(AppContext);
   const [recommendedFoods, setRecommendedFoods] = useState([]);
   const [copiedMessage, setCopiedMessage] = useState('');
   const firstSixRecommendedCards = 6;
   const values = []; // usar na renderização de ingredientes
   const measures = []; // usar na renderização de medidas dos ingredientes
-
+  console.log(drinkDetails);
   useEffect(() => {
     const fetchDrinks = async () => {
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -23,6 +26,14 @@ export default function CocktailDetails() {
       setDrinkDetails(drinkDetail);
     };
     fetchDrinks();
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('favoriteRecipes')) {
+      const arrayStorage = JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .map((recipe) => recipe.id);
+      setFavoriteHeart(arrayStorage.includes(id));
+    }
   }, []);
 
   useEffect(() => {
@@ -72,12 +83,29 @@ export default function CocktailDetails() {
           Compartilhar
 
         </button>
-        <button
-          type="button"
-          data-testid="favorite-btn"
-        >
-          Fvoritar
-        </button>
+        {favoriteHeart
+          ? (
+            <button
+              type="button"
+              data-testid="favorite-btn"
+              onClick={ () => toFavorite(id) }
+              src={ blackHeartIcon }
+              alt="heart"
+            >
+              <img src={ blackHeartIcon } alt="Heart" />
+            </button>
+          )
+          : (
+            <button
+              type="button"
+              data-testid="favorite-btn"
+              onClick={ () => toFavorite(id) }
+              src={ whiteHeartIcon }
+              alt="heart"
+            >
+              <img src={ whiteHeartIcon } alt="Heart" />
+            </button>
+          ) }
         <p>{copiedMessage}</p>
       </div>
 
