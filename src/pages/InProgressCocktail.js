@@ -55,24 +55,24 @@ export default function DoneRecipes() {
       },
     };
 
-    if (!localStorage.getItem('inProgressRecipes')) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        cocktails: {
-          [id]: [target.id],
-        },
-        meals: {
-
-        },
-      }));
+    if (localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
     }
 
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesStringified));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: {
+
+      },
+      meals: {
+        [id]: [target.id],
+      },
+    }));
   };
 
   const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
-  || { cocktails: 0 };
-  const recipeNumber = Object.getOwnPropertyNames(recipesParsed.cocktails)[0];
-  const storageArray = recipesParsed.cocktails[recipeNumber];
+  || { meals: 0 };
+  const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
+  const storageArray = recipesParsed.meals[recipeNumber];
   return (
     <>
       <h2 data-testid="recipe-title">
