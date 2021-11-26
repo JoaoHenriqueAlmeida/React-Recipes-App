@@ -18,6 +18,7 @@ export default function ExploreMeals() {
   }, []);
 
   return (
+
     <>
       <HeaderWithoutSearchBar />
       <Link to="/explorar/comidas/ingredientes">
