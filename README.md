@@ -35,9 +35,9 @@ npm start
 ## Funcionamento
 -->
 ## Próximos passos no desenvolvimento do projeto
-  - Refatorar o código
-  - Estilização
-  - Desenvolvimento de testes unitários com React Testing Library
+  - Refatorar o código e correção de possíveis bugs;
+  - Estilização;
+  - Desenvolvimento de testes unitários com React Testing Library;
 
 ## Meu grupo
 O projeto foi desenvolvido em colaboração com:
