@@ -109,7 +109,9 @@ export default function FavoriteRecipesList() {
       <button
         data-testid="filter-by-food-btn"
         type="button"
-        onClick={ () => setFavoriteRecipes(favoriteRecipes.filter((recipe) => (
+        onClick={ () => setFavoriteRecipes(JSON.parse(
+          localStorage.getItem('favoriteRecipes'),
+        ).filter((recipe) => (
           recipe.type === 'comida'))) }
       >
         Food
@@ -117,15 +119,19 @@ export default function FavoriteRecipesList() {
       <button
         data-testid="filter-by-drink-btn"
         type="button"
-        onClick={ () => setFavoriteRecipes(favoriteRecipes.filter((recipe) => (
+        onClick={ () => setFavoriteRecipes(JSON.parse(
+          localStorage.getItem('favoriteRecipes'),
+        ).filter((recipe) => (
           recipe.type === 'bebida'))) }
       >
         Drinks
       </button>
-      {favoriteRecipes.map((recipe, index) => (
+      { favoriteRecipes ? favoriteRecipes.map((recipe, index) => (
         recipe.type === 'comida'
           ? favoriteMealCard(recipe, index, copiedMessage, setCopiedMessage)
-          : favoriteCocktailCard(recipe, index, copiedMessage, setCopiedMessage))) }
+          : favoriteCocktailCard(
+            recipe, index, copiedMessage, setCopiedMessage,
+          ))) : null }
     </section>
   );
 }

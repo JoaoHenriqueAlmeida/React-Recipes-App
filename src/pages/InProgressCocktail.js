@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import './InProgressRecipe.css';
@@ -32,8 +32,13 @@ export default function DoneRecipes() {
       });
   }
 
+  const [boxes, setBoxes] = useState({});
+
   const markAsDone = ({ target }) => {
     const item = target.parentElement;
+
+    const { name, checked } = target;
+    setBoxes({ ...boxes, [name]: checked });
 
     if (Object.values(item.classList)[0] === undefined) {
       item.classList.add('completo');
@@ -68,6 +73,11 @@ export default function DoneRecipes() {
     }));
   };
 
+  function isDisabled() {
+    const { length } = Object.values(boxes).filter(Boolean);
+    return length !== values.length;
+  }
+
   const recipesParsed = JSON.parse(localStorage.getItem('inProgressRecipes'))
   || { meals: 0 };
   const recipeNumber = Object.getOwnPropertyNames(recipesParsed.meals)[0];
@@ -100,6 +110,7 @@ export default function DoneRecipes() {
             {localStorage.getItem('inProgressRecipes')
               ? (
                 <input
+                  name={ `${index}-check` }
                   id={ `${index}-check` }
                   key={ index }
                   type="checkbox"
@@ -125,6 +136,7 @@ export default function DoneRecipes() {
         <button
           data-testid="finish-recipe-btn"
           type="button"
+          disabled={ isDisabled() }
         >
           Finalizar
         </button>
