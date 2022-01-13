@@ -38,6 +38,7 @@ npm start
   - Refatorar o código e correção de possíveis bugs;
   - Estilização;
   - Desenvolvimento de testes unitários com React Testing Library;
+  - Adicionar README.md em inglês
 
 ## Meu grupo
 O projeto foi desenvolvido em colaboração com:
