@@ -8,6 +8,8 @@ O projeto consiste em uma aplicação de receitas com diversas funcionalidades q
 
 ## Instalando as dependencias e executando o projeto
 
+### Você pode executar o projeto através [desse link](https://trybe-frontend-recipes-app.vercel.app)
+
 ### No terminal:
 1 - Clone o repositório;
 ```
@@ -35,10 +37,11 @@ npm start
 ## Funcionamento
 -->
 ## Próximos passos no desenvolvimento do projeto
+  - Deixar a página de login mais intuitiva;
   - Refatorar o código e correção de possíveis bugs;
   - Estilização;
   - Desenvolvimento de testes unitários com React Testing Library;
-  - Adicionar README.md em inglês
+  - Adicionar README.md em inglês.
 
 ## Meu grupo
 O projeto foi desenvolvido em colaboração com:
