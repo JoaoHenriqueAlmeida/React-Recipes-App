@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HeaderWithoutSearchBar from '../components/HeaderWithoutSearchBar';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer.tsx';
 
 export default function ExploreCocktailIngredient() {
   const [ingredientArray, setIngredientArray] = useState([]);
