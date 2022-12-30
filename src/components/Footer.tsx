@@ -11,21 +11,21 @@ export default function Footer() {
       <Link to="/bebidas">
         <img
           data-testid="drinks-bottom-btn"
-          src="../images/drinkIcon.svg"
+          src="../assets/icons/drinkIcon.svg"
           alt="drinks"
         />
       </Link>
       <Link to="/explorar">
         <img
           data-testid="explore-bottom-btn"
-          src="../images/exploreIcon.svg"
+          src="../assets/icons/exploreIcon.svg"
           alt="explore"
         />
       </Link>
       <Link to="/comidas">
         <img
           data-testid="food-bottom-btn"
-          src="../images/mealIcon.svg"
+          src="../assets/icons/mealIcon.svg"
           alt="food"
         />
       </Link>

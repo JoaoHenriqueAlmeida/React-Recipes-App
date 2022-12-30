@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../assets/icons/whiteHeartIcon.svg';
+import blackHeartIcon from '../assets/icons/blackHeartIcon.svg';
 
 import AppContext from '../context/AppContext';
 
