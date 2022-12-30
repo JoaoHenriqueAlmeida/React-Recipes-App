@@ -2,7 +2,7 @@
 // https://github.com/tryber/sd-014-b-project-recipes-app/pull/163/commits/c53bcba54e67b7d25c468844f54f572d7385975d;
 
 import React, { useState, useContext } from 'react';
-import searchIcon from '../images/searchIcon.svg';
+import searchIcon from '../assets/icons/searchIcon.svg';
 import AppContext from '../context/AppContext';
 
 export default function SearchBar() {

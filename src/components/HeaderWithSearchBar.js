@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
-import profileIcon from '../images/profileIcon.svg';
+import profileIcon from '../assets/icons/profileIcon.svg';
 import SearchBar from './SearchBar';
 
 export default function HeaderWithSearchBar() {
