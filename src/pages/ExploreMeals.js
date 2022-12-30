@@ -15,7 +15,7 @@ export default function ExploreMeals() {
       setId(results.meals[0].idMeal);
     };
     fetchRecipe();
-  }, []);
+  });
 
   return (
 

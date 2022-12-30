@@ -23,7 +23,7 @@ export default function CocktailDetails() {
       setDrinkDetails(drinkDetail);
     };
     fetchDrinks();
-  }, []);
+  });
 
   useEffect(() => {
     if (localStorage.getItem('favoriteRecipes')) {
@@ -31,7 +31,7 @@ export default function CocktailDetails() {
         .map((recipe) => recipe.id);
       setFavoriteHeart(arrayStorage.includes(id));
     }
-  }, []);
+  });
 
   useEffect(() => {
     const fetchRecommended = async () => {
@@ -41,7 +41,7 @@ export default function CocktailDetails() {
       setRecommendedFoods(meals.slice(0, firstSixRecommendedCards));
     };
     fetchRecommended();
-  }, []);
+  });
 
   if (drinkDetails) {
     Object.keys(drinkDetails)
