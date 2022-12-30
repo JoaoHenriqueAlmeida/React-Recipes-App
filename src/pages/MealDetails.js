@@ -5,8 +5,6 @@ import AppContext from '../context/AppContext';
 import whiteHeartIcon from '../assets/icons/whiteHeartIcon.svg';
 import blackHeartIcon from '../assets/icons/blackHeartIcon.svg';
 
-import './MealDetails.css';
-
 export default function MealDetails() {
   const { id } = useParams();
   const { mealDetail, setMealDetail,
