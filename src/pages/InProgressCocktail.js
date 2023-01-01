@@ -14,7 +14,7 @@ export default function DoneRecipes() {
       setDrinkDetails(drinkDetail);
     };
     fetchDrinks();
-  }, []);
+  });
 
   const values = [];
   const measures = [];

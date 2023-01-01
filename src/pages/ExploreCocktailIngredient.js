@@ -13,7 +13,7 @@ export default function ExploreCocktailIngredient() {
       setIngredientArray(results.drinks);
     };
     fetchIngredients();
-  }, []);
+  });
   const numberOfCards = 12;
 
   return (

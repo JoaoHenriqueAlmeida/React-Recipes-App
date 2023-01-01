@@ -23,7 +23,7 @@ export default function MealDetails() {
       setMealDetail(mealDetails);
     };
     fetchMeal();
-  }, []);
+  });
 
   useEffect(() => {
     if (localStorage.getItem('favoriteRecipes')) {
@@ -31,7 +31,7 @@ export default function MealDetails() {
         .map((recipe) => recipe.id);
       setFavoriteHeart(arrayStorage.includes(id));
     }
-  }, []);
+  });
 
   // FETCH PARA DRINKS RECOMENDADOS
 
@@ -43,7 +43,7 @@ export default function MealDetails() {
       setRecommendedDrinks(drinks.slice(0, firstSixRecommendedCards));
     };
     fetchRecomendados();
-  }, []);
+  });
 
   const youtubeStr = mealDetail.strYoutube;
 

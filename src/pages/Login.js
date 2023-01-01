@@ -24,20 +24,50 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <form>
-        <input
-          type="email"
-          data-testid="email-input"
-          onChange={ ({ target }) => setEmail(target.value) }
-          value={ email }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          onChange={ ({ target }) => setPassword(target.value) }
-          value={ password }
-        />
+    <main
+      className="
+      h-screen
+      w-screen
+      flex flex-col
+      items-center
+      justify-center
+      bg-red-500"
+    >
+      <h1 className="text-3xl font-medium text-slate-200">App de receitas</h1>
+      <form
+        className="
+        flex flex-col
+        w-2/3
+        p-16
+        space-y-4
+        shadow-lg
+        rounded
+        bg-red-200
+        text-lg font-medium"
+
+      >
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            id="email"
+            data-testid="email-input"
+            placeholder="ex.: email@email.com"
+            onChange={ ({ target }) => setEmail(target.value) }
+            value={ email }
+          />
+        </label>
+        <label htmlFor="password">
+          Senha
+          <input
+            type="password"
+            id="password"
+            data-testid="password-input"
+            placeholder="******"
+            onChange={ ({ target }) => setPassword(target.value) }
+            value={ password }
+          />
+        </label>
         <button
           type="button"
           data-testid="login-submit-btn"

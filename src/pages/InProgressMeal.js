@@ -14,7 +14,7 @@ export default function DoneRecipes() {
       setMealDetail(mealDetails);
     };
     fetchMeal();
-  }, []);
+  });
 
   const values = [];
   const measures = [];

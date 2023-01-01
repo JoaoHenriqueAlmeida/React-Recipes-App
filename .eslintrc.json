@@ -1,4 +1,17 @@
 {
-  "root": true,
-  "extends": ["trybe-frontend"]
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": "trybe-frontend",
+	"rules": {
+		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }]
+	},
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"sourceType": "module"
+	},
+	"plugins": ["react", "sonarjs"]
 }

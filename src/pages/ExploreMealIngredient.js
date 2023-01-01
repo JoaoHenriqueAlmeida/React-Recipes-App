@@ -13,7 +13,7 @@ export default function ExploreMealIngredient() {
       setIngredientArray(results.meals);
     };
     fetchIngredients();
-  }, []);
+  });
   const numberOfCards = 12;
 
   return (

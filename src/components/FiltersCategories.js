@@ -23,7 +23,7 @@ function FiltersCategories() {
 
   useEffect(() => {
     fetchCategory();
-  }, []);
+  });
 
   const FIVE = 5;
   return (
