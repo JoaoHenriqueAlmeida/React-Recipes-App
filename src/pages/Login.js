@@ -43,18 +43,28 @@ export default function Login() {
         rounded
         bg-red-200"
       >
-        <input
-          type="email"
-          data-testid="email-input"
-          onChange={ ({ target }) => setEmail(target.value) }
-          value={ email }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          onChange={ ({ target }) => setPassword(target.value) }
-          value={ password }
-        />
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            id="email"
+            data-testid="email-input"
+            placeholder="ex.: email@email.com"
+            onChange={ ({ target }) => setEmail(target.value) }
+            value={ email }
+          />
+        </label>
+        <label htmlFor="password">
+          Senha
+          <input
+            type="password"
+            id="password"
+            data-testid="password-input"
+            placeholder="******"
+            onChange={ ({ target }) => setPassword(target.value) }
+            value={ password }
+          />
+        </label>
         <button
           type="button"
           data-testid="login-submit-btn"
