@@ -33,6 +33,7 @@ export default function Login() {
       justify-center
       bg-red-500"
     >
+      <h1 className="text-3xl font-medium text-slate-200">App de receitas</h1>
       <form
         className="
         flex flex-col
@@ -41,7 +42,9 @@ export default function Login() {
         space-y-4
         shadow-lg
         rounded
-        bg-red-200"
+        bg-red-200
+        text-lg font-medium"
+
       >
         <label htmlFor="email">
           Email
