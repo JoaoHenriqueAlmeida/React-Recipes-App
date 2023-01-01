@@ -2,7 +2,7 @@
 
 Projeto desenvolvido durante o segundo módulo do curso da Trybe, escola de programação que te ensina a programar, a trabalhar, e a aprender.
 
-Por ser o último projeto do módulo de front-end, o projeto tinha como objetivo consolidar todos os conhecimentos adquiridos durante o módulo, e além disso, desenvolver Soft-skills, uso de Metodologias ágeis e do github, pois era um projeto em grupo.
+Por ser o último projeto do módulo de front-end, o projeto tinha como objetivo consolidar todos os conhecimentos adquiridos durante o módulo, e além disso, desenvolver soft-skills, uso de metodologias ágeis e do github, pois era um projeto em grupo.
 
 O projeto consiste em uma aplicação de receitas com diversas funcionalidades que consome as API's [themealdb](https://www.themealdb.com/api.php) e [thecocktaildb](https://www.thecocktaildb.com/api.php);
 
