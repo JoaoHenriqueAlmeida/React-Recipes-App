@@ -10,7 +10,7 @@ export default function Cocktails() {
 
   useEffect(() => {
     fetchFunc('thecocktaildb', 'search.php?s', '');
-  }, []);
+  });
 
   return (
     <>

@@ -15,7 +15,7 @@ export default function ExploreCocktails() {
       setId(results.drinks[0].idDrink);
     };
     fetchRecipe();
-  }, []);
+  });
   return (
     <>
       <HeaderWithoutSearchBar />

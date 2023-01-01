@@ -10,7 +10,7 @@ export default function Meals() {
 
   useEffect(() => {
     fetchFunc('themealdb', 'search.php?s', '');
-  }, []);
+  });
 
   return (
     <>

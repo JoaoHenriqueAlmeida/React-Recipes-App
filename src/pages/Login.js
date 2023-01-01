@@ -24,8 +24,25 @@ export default function Login() {
   };
 
   return (
-    <main>
-      <form>
+    <main
+      className="
+      h-screen
+      w-screen
+      flex flex-col
+      items-center
+      justify-center
+      bg-red-500"
+    >
+      <form
+        className="
+        flex flex-col
+        w-2/3
+        p-16
+        space-y-4
+        shadow-lg
+        rounded
+        bg-red-200"
+      >
         <input
           type="email"
           data-testid="email-input"
